@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A1110"/>
+      <stop offset="45%" style="stop-color:#2C1B18"/>
+      <stop offset="75%" style="stop-color:#3d2520"/>
+      <stop offset="100%" style="stop-color:#1A1110"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FFAB40;stop-opacity:0.12"/>
+      <stop offset="100%" style="stop-color:#FFAB40;stop-opacity:0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#bg)"/>
+  <rect width="400" height="400" fill="url(#glow)"/>
+  <text
+    x="200" y="240"
+    font-family="Georgia, serif"
+    font-size="160"
+    font-weight="400"
+    text-anchor="middle"
+    fill="#FFAB40"
+    fill-opacity="0.2"
+  >M</text>
+  <text
+    x="200" y="310"
+    font-family="Helvetica, Arial, sans-serif"
+    font-size="13"
+    font-weight="300"
+    letter-spacing="8"
+    text-anchor="middle"
+    fill="#FFF9F2"
+    fill-opacity="0.3"
+  >MAREVO</text>
+</svg>

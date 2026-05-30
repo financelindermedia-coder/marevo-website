@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+/* ── Marevo design tokens ─────────────────────────────────────── */
+@theme {
+  --color-marevo-gold: #ffab40;
+  --color-marevo-umber: #1a1110;
+  --color-marevo-dark: #2c1b18;
+  --color-marevo-cream: #fff9f2;
+
+  /* Override default font stacks — variables injected by next/font */
+  --font-serif: var(--font-cormorant), Georgia, serif;
+  --font-sans: var(--font-montserrat), system-ui, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, monospace;
+}
+
+/* ── Global base ──────────────────────────────────────────────── */
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #1a1110;
+  color: #fff9f2;
+  overflow-x: hidden;
+}
+
+/* ── Glassmorphism card ───────────────────────────────────────── */
+.glass-card {
+  background: rgba(20, 14, 13, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 171, 64, 0.08);
+}
+
+/* ── Scrollbar ────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #1a1110;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 171, 64, 0.2);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 171, 64, 0.4);
+}

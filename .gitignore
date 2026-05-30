@@ -1,0 +1,23 @@
+# Dependencies
+frontend/node_modules/
+
+# Next.js build
+frontend/.next/
+
+# Env files
+.env
+.env.local
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
