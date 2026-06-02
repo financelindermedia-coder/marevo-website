@@ -26,6 +26,8 @@ COPY --from=builder --chown=nextjs:nodejs /app/node_modules ./node_modules
 COPY --from=builder --chown=nextjs:nodejs /app/package.json ./package.json
 COPY --from=builder --chown=nextjs:nodejs /app/payload.config.ts ./payload.config.ts
 COPY --from=builder --chown=nextjs:nodejs /app/collections ./collections
+COPY --from=builder --chown=nextjs:nodejs /app/tsconfig.json ./tsconfig.json
+COPY --from=builder --chown=nextjs:nodejs /app/payload-types.ts ./payload-types.ts
 
 USER nextjs
 EXPOSE 3000
