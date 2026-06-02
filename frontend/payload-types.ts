@@ -132,8 +132,8 @@ export interface Album {
    */
   label?: string | null;
   description: string;
-  coverImage: number | Media;
-  backgroundImage: number | Media;
+  coverImage?: (number | null) | Media;
+  backgroundImage?: (number | null) | Media;
   /**
    * Full Spotify URL
    */

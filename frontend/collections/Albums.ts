@@ -30,13 +30,11 @@ export const Albums: CollectionConfig = {
       name: 'coverImage',
       type: 'upload',
       relationTo: 'media',
-      required: true,
     },
     {
       name: 'backgroundImage',
       type: 'upload',
       relationTo: 'media',
-      required: true,
     },
     {
       name: 'spotifyLink',
