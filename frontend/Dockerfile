@@ -29,9 +29,13 @@ COPY --from=builder --chown=nextjs:nodejs /app/collections ./collections
 COPY --from=builder --chown=nextjs:nodejs /app/tsconfig.json ./tsconfig.json
 COPY --from=builder --chown=nextjs:nodejs /app/payload-types.ts ./payload-types.ts
 
+# Create migrations dir as root before switching user
+RUN mkdir -p /app/migrations && chown nextjs:nodejs /app/migrations
+
 USER nextjs
 EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-CMD ["sh", "-c", "npx payload migrate && npm run start"]
+# On first boot: create initial migration + run it. On subsequent boots: migrate is a no-op.
+CMD ["sh", "-c", "npx payload migrate:create --name initial 2>/dev/null || true; npx payload migrate; npm run start"]
