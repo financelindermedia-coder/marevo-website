@@ -11,6 +11,8 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
+# Generate Payload types and importmap before building
+RUN npx payload generate:types && npx payload generate:importmap
 RUN npm run build
 
 FROM base AS runner

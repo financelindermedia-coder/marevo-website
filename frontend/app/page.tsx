@@ -3,23 +3,57 @@ import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { AlbumSection } from "@/components/AlbumSection";
 import { AboutSection } from "@/components/AboutSection";
-import { MOCK_ALBUMS } from "@/data/albums";
+import { getPayload } from "payload";
+import configPromise from "@payload-config";
+import type { Album } from "@/types";
+import type { Album as PayloadAlbum, Media } from "@/payload-types";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+function toAlbum(doc: PayloadAlbum): Album {
+  const mediaUrl = (m: number | string | Media | null | undefined) =>
+    typeof m === "object" && m && "url" in m && m.url ? m.url : "/images/placeholder-cover.svg";
+
+  return {
+    id: String(doc.id),
+    titleLine1: doc.titleLine1,
+    titleLine2: doc.titleLine2 ?? undefined,
+    label: doc.label ?? undefined,
+    description: doc.description,
+    coverImage: mediaUrl(doc.coverImage),
+    backgroundImage: mediaUrl(doc.backgroundImage),
+    spotifyLink: doc.spotifyLink ?? "#",
+    appleMusicLink: doc.appleMusicLink ?? "#",
+    youtubeLink: doc.youtubeLink ?? "#",
+    deezerLink: doc.deezerLink ?? "#",
+    songs: (doc.songs ?? []).map((s, i) => ({
+      id: String(i),
+      title: s.title,
+      duration: s.duration ?? "",
+      trackNumber: s.trackNumber ?? i + 1,
+    })),
+  };
+}
+
+export default async function Home() {
+  const payload = await getPayload({ config: configPromise });
+
+  const { docs } = await payload.find({
+    collection: "albums",
+    sort: "order",
+    limit: 20,
+    depth: 1,
+  });
+
+  const albums: Album[] = docs.map(toAlbum);
+
   return (
     <main className="bg-marevo-umber">
-      {/* Fixed navigation bar — overlays every section */}
       <Navbar />
-
-      {/* Section 1: Hero — full-screen video background */}
       <Hero />
-
-      {/* Section 2+: Album sections — each with its own parallax background */}
-      {MOCK_ALBUMS.map((album) => (
+      {albums.map((album) => (
         <AlbumSection key={album.id} album={album} />
       ))}
-
-      {/* About section — own background image + glass card */}
       <AboutSection />
 
       <footer
