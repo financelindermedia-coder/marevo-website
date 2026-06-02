@@ -10,6 +10,13 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npx payload generate:types && npx payload generate:importmap
+# Compile Payload SCSS vars + combine with pre-compiled component CSS
+RUN node -e "\
+const sass=require('sass'),fs=require('fs');\
+const v=sass.compile('./node_modules/@payloadcms/ui/dist/scss/app.scss',{loadPaths:['./node_modules/@payloadcms/ui/dist/scss'],style:'compressed',quietDeps:true,silenceDeprecations:['import']});\
+const c=fs.readFileSync('./node_modules/@payloadcms/ui/dist/styles.css','utf8');\
+fs.writeFileSync('./app/(payload)/payload-admin.css',v.css+'\n'+c);\
+"
 RUN npm run build
 
 FROM node:22-alpine AS runner

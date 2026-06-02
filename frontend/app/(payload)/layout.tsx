@@ -3,7 +3,7 @@ import configPromise from '@payload-config'
 import type { ServerFunctionClient } from 'payload'
 import React from 'react'
 import { importMap } from './admin/importMap'
-import '@payloadcms/ui/styles.css'
+import './payload-admin.css'
 
 type Args = {
   children: React.ReactNode
