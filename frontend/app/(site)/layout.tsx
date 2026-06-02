@@ -25,8 +25,8 @@ export default function SiteLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className={`${montserrat.variable} ${cormorant.variable} antialiased font-sans`}>
-      {children}
-    </div>
+    <html lang="en" className={`${montserrat.variable} ${cormorant.variable}`}>
+      <body className="antialiased font-sans">{children}</body>
+    </html>
   );
 }
